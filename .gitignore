@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+client/node_modules/
+
+# Environment variables (Safety first!)
+.env
+client/.env
+
+# Build outputs
+dist/
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
