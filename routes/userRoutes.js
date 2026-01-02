@@ -12,17 +12,12 @@ const {
   forgotPassword,
   verifyOTP 
 } = require('../controllers/userController');
-const { protect } = require('../middleware/authMiddleware');
+const { protect, adminOnly } = require('../middleware/authMiddleware'); // Ensure adminOnly is imported if used
 const upload = require('../middleware/uploadMiddleware');
 
 /**
  * ==================================================================================
  * AUSDAUER AUTH ROUTES (VERSION 3.8.0 - ADMIN SYNC FINAL)
- * ==================================================================================
- * PATCH LOG:
- * 1. METHOD SYNC: Changed reset-scores from POST to PUT to match Chair Terminal.
- * 2. VERIFY OTP: Public endpoint active for credential recovery.
- * 3. PERSONNEL MANAGEMENT: All Chair-specific commands require 'protect' middleware.
  * ==================================================================================
  */
 
@@ -32,13 +27,12 @@ router.post('/forgot-password', forgotPassword);
 router.post('/verify-otp', verifyOTP); 
 
 // --- PROTECTED PERSONNEL ROUTES (Require Token) ---
-// Line 35: Add 'protect,' before upload.single
-router.post('/', protect, upload.single('photo'), registerUser);
+// SECURITY RESTORED: Added 'protect' back to this line!
+router.post('/', protect, upload.single('photo'), registerUser); 
 router.get('/me', protect, getMe); 
 router.get('/leaderboard', protect, getLeaderboard); 
 
 // --- CHAIR SPECIFIC COMMANDS ---
-// FIXED: Changed router.post to router.put to align with frontend api.put call
 router.put('/reset-scores', protect, resetScores); 
 router.put('/score/:id', protect, updateScore); 
 router.delete('/:id', protect, deleteUser); 
