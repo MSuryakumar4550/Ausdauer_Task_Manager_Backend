@@ -32,7 +32,8 @@ router.post('/forgot-password', forgotPassword);
 router.post('/verify-otp', verifyOTP); 
 
 // --- PROTECTED PERSONNEL ROUTES (Require Token) ---
-router.post('/', upload.single('photo'), registerUser);
+// Line 35: Add 'protect,' before upload.single
+router.post('/', protect, upload.single('photo'), registerUser);
 router.get('/me', protect, getMe); 
 router.get('/leaderboard', protect, getLeaderboard); 
 

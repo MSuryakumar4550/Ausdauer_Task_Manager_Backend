@@ -44,15 +44,11 @@ const loginUser = async (req, res) => {
 // @route   POST /api/users
 const registerUser = async (req, res) => {
   try {
-    // --- TEMPORARY UNLOCK START ---
-    // I have commented this out so you can create the first Admin/Chair.
-    // AFTER you create the user, come back and uncomment these lines!
-    
-    // if (!req.user || req.user.role !== 'Chair') {
-    //   return res.status(403).json({ message: 'Access Denied: Chair authorization required.' });
-    // }
-    
-    // --- TEMPORARY UNLOCK END ---
+    // --- SECURITY RESTORED ---
+    // Only Chairs can create new users now.
+    if (!req.user || req.user.role !== 'Chair') {
+      return res.status(403).json({ message: 'Access Denied: Chair authorization required.' });
+    }
 
     const { name, email, password, role, designation, department, mobile, dateOfJoining } = req.body;
 
