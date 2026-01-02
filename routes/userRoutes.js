@@ -32,7 +32,7 @@ router.post('/forgot-password', forgotPassword);
 router.post('/verify-otp', verifyOTP); 
 
 // --- PROTECTED PERSONNEL ROUTES (Require Token) ---
-router.post('/', protect, upload.single('photo'), registerUser); 
+router.post('/', upload.single('photo'), registerUser);
 router.get('/me', protect, getMe); 
 router.get('/leaderboard', protect, getLeaderboard); 
 
