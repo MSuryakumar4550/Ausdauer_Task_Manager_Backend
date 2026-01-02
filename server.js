@@ -13,10 +13,11 @@ connectDB();
 const app = express();
 const server = http.createServer(app);
 
-// --- 1. ALLOWED ORIGINS (Add your Vercel URL here) ---
+// --- 1. ALLOWED ORIGINS (Crucial Fix) ---
+// This allows both your computer and the live website to connect
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://ausdauer-task-manager-frontend.vercel.app" // <--- YOUR VERCEL URL
+  "https://ausdauer-task-manager-frontend.vercel.app" 
 ];
 
 // --- 2. SOCKET.IO CORS ---
