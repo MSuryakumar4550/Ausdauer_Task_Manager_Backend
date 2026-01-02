@@ -7,13 +7,6 @@ const { sendOTPEmail } = require('../utils/emailService');
  * ==================================================================================
  * AUSDAUER BACKEND - USER CONTROLLER (VERSION 3.8.0 - ADMIN SYNC STABILIZED)
  * ==================================================================================
- * FEATURES:
- * 1. LIVE OTP ENGINE: Stabilized 6-digit codes with absolute timestamp verification.
- * 2. IDENTITY HANDSHAKE: Includes 'name' in responses for frontend labeling.
- * 3. PERSONNEL DIRECTORY: Full CRUD for Chairs to manage the entire workforce.
- * 4. CASCADE DELETE: Automatically purges tasks when a member is removed.
- * 5. ATOMIC RESET: Global score synchronization to zero via updateMany.
- * ==================================================================================
  */
 
 // @desc    Authenticate a user via Password
@@ -51,9 +44,15 @@ const loginUser = async (req, res) => {
 // @route   POST /api/users
 const registerUser = async (req, res) => {
   try {
-    if (!req.user || req.user.role !== 'Chair') {
-      return res.status(403).json({ message: 'Access Denied: Chair authorization required.' });
-    }
+    // --- TEMPORARY UNLOCK START ---
+    // I have commented this out so you can create the first Admin/Chair.
+    // AFTER you create the user, come back and uncomment these lines!
+    
+    // if (!req.user || req.user.role !== 'Chair') {
+    //   return res.status(403).json({ message: 'Access Denied: Chair authorization required.' });
+    // }
+    
+    // --- TEMPORARY UNLOCK END ---
 
     const { name, email, password, role, designation, department, mobile, dateOfJoining } = req.body;
 
